@@ -35,39 +35,35 @@ class User {
         $stmt->execute();
         // Récupérer toutes les lignes résultantes
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result as $row){
-            echo "ok";
+
+        if($result > 0){
+            try{
+                $pdo->beginTransaction();
+    
+                //on effectue les actions
+    
+                //créer l'utilisateur
+                $query = "INSERT INTO users (nom, prenom, email, created_at) VALUES (?,?,?,?)";
+                $stmt = $pdo->prepare($query);
+                $values = array($this->nom, $this->prenom, $this->email, $this->created_at);
+    
+                $result = $stmt->execute($values);
+    
+                $pdo->commit();
+    
+            } catch (\Exception $e){
+                $pdo->rollBack();
+            }
+            echo "Utilisateur créé avec succès en base de données.";
+        }else{
+            echo "Un utilisateur avec ce mail existe déjà";
         }
-        
-        try{
-            $pdo->beginTransaction();
 
-            //on effectue les actions
+    }
 
-            //créer l'utilisateur
-            $query = "INSERT INTO users (nom, prenom, email, created_at) VALUES (?,?,?,?)";
-            $stmt = $pdo->prepare($query);
-            $values = array($this->nom, $this->prenom, $this->email, $this->created_at);
+    public function updateUser() {
+        global $pdo;
 
-            $result = $stmt->execute($values);
-
-            $pdo->commit();
-
-        } catch (\Exception $e){
-            $pdo->rollBack();
-        }
-
-        
-        
-
-        
-
-        // // Vérifier le succès de l'insertion
-        // if ($result) {
-        //     echo "Utilisateur créé avec succès en base de données.";
-        // } else {
-        //     echo "Erreur lors de la création de l'utilisateur en base de données : " . $stmt->error;
-        // }
 
     }
 
@@ -79,8 +75,40 @@ class User {
         $stmt->execute();
         $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        foreach ($result as $row){
-            echo $row['nom'];
+        ?>
+        <h2>Liste des utilisateurs</h2>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Updated At</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php 
+                foreach ($result as $row) {
+            ?>
+                <tr>
+                    <td scope="row"> <?= $row['id']?> </td>
+                    <td> <?= $row['nom']?> </td>
+                    <td> <?= $row['prenom']?> </td>
+                    <td> <?= $row['email']?> </td>
+                    <td> <?= $row['created_at']?> </td>
+                    <td> <?= $row['updated_at']?> </td>
+                    <td>
+                        <button class="btn btn-warning" onclick="editUser( <?= $row['id']?> )">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteUser( <?= $row['id']?> )">X</button>
+                    </td>
+            </tr>
+
+        <?php
+
         }
     }
 

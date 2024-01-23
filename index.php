@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+<?php
 
-
-
-
-
-
-</body>
-</html>
-
-
-<?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+include_once "includes/header.php";
 
 use App\models\User;
 use App\models\Livre;
@@ -40,5 +21,5 @@ $book = new Livre("test", "Lorem ipsum dolor sit amet, consectetur adipiscing el
 
 
 
-
+include_once "includes/footer.php";
 ?>
