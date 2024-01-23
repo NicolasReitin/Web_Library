@@ -1,0 +1,17 @@
+{
+    "name": "nicolas/weblibrary",
+    "autoload": {
+        "psr-4": {
+            "App\\": "models/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nicolas",
+            "email": "reitin.pro@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
