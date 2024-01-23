@@ -1,33 +1,33 @@
 <?php
 
-// include "./common/conn.php";
-
 namespace App\models;
 
+use DateTime;
 use PDO;
 
 class User {
     // private $dbCo;
 
-    public $nom;
-    public $prenom;
-    public $email;
-    public $created_at;
-    public $updated_at;
+    public string $nom;
+    public string $prenom;
+    public string $email;
+    public string $password;
+    public DateTime $created_at;
+    public DateTime $updated_at;
 
     // Constructeur
-    public function __construct($nom, $prenom, $email, $created_at = null, $updated_at = null) {
+    public function __construct(string $nom, string $prenom, string $email, string $password, DateTime $created_at = null, DateTime $updated_at = null) {
         // $this->dbCo = MysqlDatabase::get();
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->email = $email;
+        $this->password = $password;
         $this->created_at = $created_at ?: new \DateTime;
         $this->updated_at = $updated_at;
     }
 
     public function createUser(){
         global $pdo;
-        
         //vérifie si l'utilisateur existe déjà avec un mail identique
         $query = "SELECT * FROM users WHERE email = :email";
         $stmt = $pdo->prepare($query);
@@ -39,19 +39,17 @@ class User {
         if($result > 0){
             try{
                 $pdo->beginTransaction();
-    
                 //on effectue les actions
     
                 //créer l'utilisateur
-                $query = "INSERT INTO users (nom, prenom, email, created_at) VALUES (?,?,?,?)";
+                $query = "INSERT INTO users (nom, prenom, email, password created_at) VALUES (?,?,?,?,?)";
                 $stmt = $pdo->prepare($query);
-                $values = array($this->nom, $this->prenom, $this->email, $this->created_at);
-    
+                $values = array($this->nom, $this->prenom, $this->email, $this->password, $this->created_at);
                 $result = $stmt->execute($values);
-    
+
                 $pdo->commit();
-    
             } catch (\Exception $e){
+                // rollback si erreur dans la transaction
                 $pdo->rollBack();
             }
             echo "Utilisateur créé avec succès en base de données.";

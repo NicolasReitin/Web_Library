@@ -1,3 +1,7 @@
+<?php 
+require_once(__DIR__ . "/../common/conn.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +9,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Library</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <base href="http://localhost/exos/weblibrary/">
+    <link rel="stylesheet" href="src/styles/style.css">
 </head>
 <body>
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <!-- Boutons de navigation à gauche -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.php">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Livre</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Auteur</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Éditeur</a>
+            </li>
+        </ul>
+
+        <!-- Logo au milieu -->
+        <a class="navbar-brand mx-auto" href="index.php"><img class="logo" src="src/assets/images/web_library.png" alt="Logo"></a>
+
+        <!-- Boutons de navigation à droite -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Booklist</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="views/register.php">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="views/login.php">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,13 +1,16 @@
 <?php
 
-include_once "includes/header.php";
+include "includes/header.php";
 
 use App\models\User;
 use App\models\Livre;
 
+?>
+<h1>Bienvenue sur Web Library</h1>
 
-// require_once "src/bdd.php";
-require_once "common/conn.php";
+
+<?php
+
 
 
 $user = new User("john", "Doe", "test@test.com");
