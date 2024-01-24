@@ -1,5 +1,7 @@
 <?php
 include "includes/header.php";
+use App\models\Version_livre;
+
 ?>
 
 
@@ -13,6 +15,21 @@ include "includes/header.php";
 </form>
 
 <?php
+
+$version_livres = Version_livre::getAll();
+
+foreach ($version_livres as $version_livre) :
+    // var_dump($version_livre->getLivreId());
+    $editeurId = $version_livre->getEditeurId();
+    $editeurId = $editeurId['editeur_id'];
+    $editeurName = $version_livre->getEditeurName($editeurId);
+    if ($editeurName){
+        echo $editeurName['nom']."<br>";
+    }
+
+
+endforeach;
+
 
 
 include_once "includes/footer.php";

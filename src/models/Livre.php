@@ -47,10 +47,6 @@ class Livre {
         $stmt->execute();
         $result = $stmt->fetch();
 
-        // $auteur = [];
-
-        // var_dump($result['nom']);
-        // exit;
         return $result;
     }
 

@@ -8,8 +8,9 @@ use App\models\Auteur;
 ?>
 
 <h1>Livres</h1>
-<div class="container">
+<div class="containerLivre">
     <div class="leftLivre">
+    <form action="controllers/favoris.php" method="POST">
 
         <table class="table">
             <thead>
@@ -37,14 +38,17 @@ use App\models\Auteur;
                         <td><?php echo $livre->titre; ?></td>
                         <td><?php echo $livre->resume; ?></td>
                         <td><?php echo $auteurName['prenom'] . " " .$auteurName['nom'] ?></td>
-                        <td style="text-align: center">
-                            <!-- Ajoutez une checkbox ici pour ajouter aux favoris -->
-                            <input type="checkbox" name="favoris[]" value="<?php echo $livre->getId(); ?>">
-                        </td>
+                            <td style="text-align: center">
+                                <!-- Ajoutez une checkbox ici pour ajouter aux favoris -->
+                                <input type="checkbox" name="favoris[]" value="<?php echo $livre->getId(); ?>">
+                            </td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
+        <input class="btn btn-outline-success" type="submit" value="Ajouter aux favoris">
+    </form>
+
     </div>
 
     <div class="rightLivre">
@@ -61,7 +65,7 @@ use App\models\Auteur;
                 <br>
                 <label for="select">Auteur</label>
                 <select class="form-select" name="auteurId" id="select">
-                    <option  selected>Choisissez un auteur</option>
+                    <option disabled selected>Choisissez un auteur</option>
                 
                 <?php
                     $auteurs = Auteur::getAll();
