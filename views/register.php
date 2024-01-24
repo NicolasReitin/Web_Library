@@ -33,7 +33,7 @@ include "../includes/header_login.php";
                         <input type="password" name="password" placeholder="Password">                    
                     </div>
                     <div>
-                        <input type="submit" class="btn btn-warning" name="inscription" value="Inscription">
+                        <input type="submit" class="btn btn-warning" name="register" value="Inscription">
                     </div>
                 </form>
                 

@@ -1,9 +1,14 @@
 <?php 
-include "../includes/header_login.php";
+    include "../includes/header_login.php";
+
+    session_start();
+
+    if ($_SESSION){
+        header("Location: ../index.php");
+    }
 ?>
 
-
-<div class="parent">
+    <div class="parent">
         <div class="blocLogin"> 
             <a href="index.php"><img class="logo" src="src/assets/images/web_library.png" alt=""></a>
             <div class="connexion">
@@ -11,11 +16,11 @@ include "../includes/header_login.php";
                 <form action="controllers/auth/login.php" method="POST">
                     <div class="mail">
                         <img class="icon" src="src/assets/icones/enveloppe.png" alt="">
-                        <input type="email" name="usermail" placeholder="E-mail"><br>
+                        <input type="email" name="email" placeholder="E-mail"><br>
                     </div>
                     <div class="password">
                         <img class="icon" src="src/assets/icones/lock.png" alt="">
-                        <input type="password" name="usermdp" placeholder="Password">
+                        <input type="password" name="password" placeholder="Password">
                     </div>
                     <div>
                         <p><a href="#">Mot de passe oublié ?</a></p>

@@ -1,5 +1,7 @@
 <?php 
 require_once(__DIR__ . "/../common/conn.php");
+
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -41,14 +43,35 @@ require_once(__DIR__ . "/../common/conn.php");
                 <a class="nav-link" href="#">Booklist</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="views/register.php">Register</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="views/login.php">Login</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="#">Contact</a>
             </li>
+
+            <?php
+                if ($_SESSION){
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="views/profil.php"><?= ucfirst($_SESSION['prenom'])  ?></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="controllers/auth/logout.php">Logout</a>
+                    </li>
+                <?php
+                    
+                }else{
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="views/register.php">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="views/login.php">Login</a>
+                    </li>
+                <?php
+                }
+                ?>
+
+
+            
         </ul>
     </div>
 </nav>
