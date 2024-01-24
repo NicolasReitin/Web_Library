@@ -7,4 +7,16 @@ h1 {
   width: 80px;
 }
 
+.container {
+  margin-top: 50px;
+  display: flex;
+  gap: 100px;
+}
+
+.leftLivre {
+  width: 70%;
+  border-right: 2px solid black;
+  padding-right: 50px;
+}
+
 /*# sourceMappingURL=style.css.map */

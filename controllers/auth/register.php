@@ -14,7 +14,6 @@
         
 
         $user = new User($nom, $prenom, $email, $password);
-        // var_dump($user);
         $user->create();
 
         header("Location: ../../index.php");

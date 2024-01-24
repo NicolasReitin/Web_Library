@@ -6,7 +6,7 @@ use PDO;
 
 class User {
     // private $dbCo;
-
+    protected $id;
     public string $nom;
     public string $prenom;
     public string $email;
@@ -23,6 +23,10 @@ class User {
         $this->password = $password;
         $this->created_at = $created_at ?: new \DateTime;
         $this->updated_at = $updated_at;
+    }
+
+    public function getId() {
+        return $this->id;
     }
 
     public function create(){
@@ -50,6 +54,7 @@ class User {
             } catch (\Exception $e){
                 // rollback si erreur dans la transaction
                 $pdo->rollBack();
+                throw $e;
             }
             echo "Utilisateur créé avec succès en base de données.";
         }else{
@@ -58,10 +63,23 @@ class User {
 
     }
 
-    public function update() {
+    public function update($id){
         global $pdo;
 
+        try{
+            $pdo->beginTransaction();
 
+            $query = "UPDATE `users` SET `nom` = ?, `prenom` = ?, `email` = ?, `updated_at` = ? WHERE id = ?";
+            $stmt = $pdo->prepare($query);
+            $values = array($this->nom, $this->prenom, $this->email, date('Y-m-d h:i:s'), $id);
+            $stmt->execute($values);
+
+            $pdo->commit();
+        } catch (\Exception $e){
+            // rollback si erreur dans la transaction
+            $pdo->rollBack();
+            throw $e;
+        }
     }
 
     public function getAllUsers() {
@@ -71,6 +89,8 @@ class User {
         $stmt = $pdo->prepare($query);
         $stmt->execute();
         $result =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // return $result;
 
         ?>
         <h2>Liste des utilisateurs</h2>

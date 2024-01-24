@@ -24,13 +24,13 @@ session_start();
                 <a class="nav-link" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Livre</a>
+                <a class="nav-link" href="views/livres.php">Livres</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Auteur</a>
+                <a class="nav-link" href="views/auteurs.php">Auteurs</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Éditeur</a>
+                <a class="nav-link" href="#">Éditeurs</a>
             </li>
         </ul>
 
@@ -69,8 +69,6 @@ session_start();
                 <?php
                 }
                 ?>
-
-
             
         </ul>
     </div>
