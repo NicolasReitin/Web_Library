@@ -24,7 +24,8 @@ foreach ($version_livres as $version_livre) :
     $editeurId = $editeurId['editeur_id'];
     $editeurName = $version_livre->getEditeurName($editeurId);
     if ($editeurName){
-        echo $editeurName['nom']."<br>";
+        echo $editeurName['nom']." | Version : ";
+        echo $version_livre->categorie . "<br>";
     }
 
 

@@ -68,6 +68,30 @@ class Livre {
         return $livres;
     }
 
+    public static function getById($livreId) {
+        global $pdo;
+    
+        $query = "SELECT * FROM livres WHERE id = :id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":id", $livreId);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $result;
+    }
+    
+    public static function getAllFavorites(){
+        global $pdo;
+
+        $query = "SELECT liste_livre_id FROM liste_favoris WHERE user_id = :user_id";
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(":user_id", $_SESSION["user_id"]);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result;
+    }
+
     public function create(){
         global $pdo;
         try{

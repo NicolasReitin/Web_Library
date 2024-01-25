@@ -10,7 +10,7 @@ use App\models\Auteur;
 <h1>Livres</h1>
 <div class="containerLivre">
     <div class="leftLivre">
-    <form action="controllers/favoris.php" method="POST">
+    <form action="controllers/addFavoris.php" method="POST">
 
         <table class="table">
             <thead>
@@ -40,7 +40,7 @@ use App\models\Auteur;
                         <td><?php echo $auteurName['prenom'] . " " .$auteurName['nom'] ?></td>
                             <td style="text-align: center">
                                 <!-- Ajoutez une checkbox ici pour ajouter aux favoris -->
-                                <input type="checkbox" name="favoris[]" value="<?php echo $livre->getId(); ?>">
+                                <input type="checkbox" name="favoris[]" value=<?php echo $livre->getId(); ?>>
                             </td>
                     </tr>
                 <?php endforeach ?>
