@@ -21,10 +21,10 @@ session_start();
         <!-- Boutons de navigation à gauche -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.php">Home</a>
+                <a class="nav-link" href="views/livres.php">Livres</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="views/livres.php">Livres</a>
+                <a class="nav-link" href="views/version_livre.php">Versions</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="views/auteurs.php">Auteurs</a>

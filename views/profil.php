@@ -9,6 +9,8 @@ $listeFavoris = Livre::getAllFavorites();
 $favorisJson = $listeFavoris['liste_livre_id'];
 $arrayFromJson = json_decode($favorisJson, true);
 ?>
+
+
     <form action="controllers/removeFavoris.php" method="POST">
         
         <table class="table">
