@@ -10,45 +10,36 @@ use App\models\Auteur;
 <h1>Livres</h1>
 <div class="containerLivre">
     <div class="leftLivre">
-    <form action="controllers/addFavoris.php" method="POST">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Résumé</th>
-                    <th>Nom de l'Auteur</th>
-                    <th>Ajout aux Favoris</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                    $livres = Livre::getAll();
-                    
-                    
 
-                    
-                    foreach ($livres as $livre) :
-                        $livreId = $livre->getId();
-                        $auteurId = $livre->getAuteurId($livreId);
-                        $auteurName = $livre->getAuteurName($auteurId);
-                ?>
+        <form action="controllers/addFavoris.php" method="POST">
 
-                    <tr>
-                        <td><?php echo $livre->titre; ?></td>
-                        <td><?php echo $livre->resume; ?></td>
-                        <td><?php echo $auteurName['prenom'] . " " .$auteurName['nom'] ?></td>
-                            <td style="text-align: center">
-                                <!-- Ajoutez une checkbox ici pour ajouter aux favoris -->
-                                <input type="checkbox" name="favoris[]" value=<?php echo $livre->getId(); ?>>
-                            </td>
-                    </tr>
-                <?php endforeach ?>
-            </tbody>
-        </table>
-        <input class="btn btn-outline-success" type="submit" value="Ajouter aux favoris">
-    </form>
-
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+            <?php 
+                $livres = Livre::getAll();
+                foreach ($livres as $livre) :
+                            $livreId = $livre->getId();
+                            $auteurId = $livre->getAuteurId($livreId);
+                            $auteurName = $livre->getAuteurName($auteurId);
+                    ?>
+                <div class="col">
+                    <div class="card" style="height : 250px; width: 400px">
+                    <!-- <img src="..." class="card-img-top" alt="..."> -->
+                    <div class="card-body">
+                        <h3 class="card-title"><?php echo $livre->titre ?></h3>
+                        <h5 class="card-text"><?php echo $auteurName['prenom'] . " " .$auteurName['nom'] ?></h5>
+                        <p class="card-text"><?php echo $livre->resume ?></p>
+                        <label for="checkbox">Ajout aux favoris</label>
+                        <input id="checkbox" type="checkbox" name="favoris[]" value=<?php echo $livre->getId(); ?>>
+                    </div>
+                    </div>
+                </div>
+            <?php 
+                endforeach 
+            ?>
+            </div>
+            <input class="btn btn-outline-success mt-3" type="submit" value="Ajouter aux favoris">
+        </form>
     </div>
 
     <div class="rightLivre">

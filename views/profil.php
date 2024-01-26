@@ -11,46 +11,39 @@ $arrayFromJson = json_decode($favorisJson, true);
 ?>
 
 
-    <form action="controllers/removeFavoris.php" method="POST">
-        
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Résumé</th>
-                    <th>Nom de l'Auteur</th>
-                    <th>Retirer des Favoris</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <?php
-            // var_dump($arrayFromJson);
-            
-            foreach ($arrayFromJson as $livreId) : 
+<form action="controllers/removeFavoris.php" method="POST">
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+        <?php
+        foreach ($arrayFromJson as $livreId) : 
                 $livre = Livre::getById($livreId);
-                
                 $auteurId = $livre['auteur_id'];
-                
                 $LivreAuteur= new Livre($livre['titre'], $livre['resume'], $livre['auteur_id']);
-                $auteurName = $LivreAuteur->getAuteurName($auteurId);
-                
-                ?>
-                <tr>
-                    <td><?php echo $livre['titre']; ?></td>
-                    <td><?php echo $livre['resume']; ?></td>
-                    <td><?php echo $auteurName['prenom'] . " " .$auteurName['nom'] ?></td>
-                        <td style="text-align: center">
-                            <!-- Ajoutez une checkbox ici pour ajouter aux favoris -->
-                            <input type="checkbox" name="favoris[]" value=<?= $livreId ?>>
-                        </td>
-                    </tr>
-                <?php
-                    endforeach
-                ?>
-            </tbody>
-        </table>
-        <input class="btn btn-outline-success" type="submit" value="Retirer des favoris">
+                $auteurName = $LivreAuteur->getAuteurName($auteurId);   
+        ?>
+
+            <div class="col">
+                <div class="card" style="height : 250px; width: 400px">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <h3 class="card-title"><?php echo $livre['titre'] ?></h3>
+                    <h3 class="card-text"><?php echo $auteurName['prenom'] . " " .$auteurName['nom'] ?></h3>
+                    <p class="card-text"><?php echo $livre['resume'] ?></p>
+                    <label for="checkbox">Retirer des favoris</label>
+                    <input id="checkbox" type="checkbox" name="favoris[]" value=<?= $livreId ?>>
+                    <input class="btn btn-outline-success mt-3" type="submit" value="Retirer des favoris">
+
+                </div>
+                </div>
+            </div>
+
+        <?php
+            endforeach
+        ?>
+        </div>
+            
+        
+        <!-- <input class="btn btn-outline-success mt-3" type="submit" value="Retirer des favoris"> -->
     </form>
 
     <?php

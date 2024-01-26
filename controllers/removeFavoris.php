@@ -6,8 +6,6 @@ session_start();
 global $pdo;
 var_dump($_SESSION);
 
-// Supposons que les IDs des nouveaux livres proviennent d'une requête POST
-// Vérifiez si le champ 'livres' existe dans la requête POST (ajustez selon votre formulaire)
 if ($_SESSION){
     if (isset($_POST['favoris'])) {
         if (isset($_POST['favoris']) && $_POST['favoris'] != '') {
@@ -21,7 +19,6 @@ if ($_SESSION){
             $livresASupprimer = array_map('intval', $livresASupprimer);
             var_dump($livresASupprimer);
 
-            // Récupérez le tableau existant depuis la base de données
             $querySelect = "SELECT liste_livre_id FROM liste_favoris WHERE user_id = :user_id";
             $stmtSelect = $pdo->prepare($querySelect);
             $stmtSelect->bindParam(":user_id", $_SESSION['user_id']);
@@ -42,11 +39,10 @@ if ($_SESSION){
                 }
                 var_dump($arrayFromDatabase);
     
-                // Réencodez le tableau mis à jour en JSON
                 $jsonArrayUpdated = json_encode($arrayFromDatabase);
                 var_dump($jsonArrayUpdated);
     
-                // Mettez à jour la base de données avec le tableau mis à jour
+                // update de la BDD
                 $queryUpdate = "UPDATE liste_favoris SET liste_livre_id = :jsonArrayUpdated WHERE user_id = :user_id";
                 $stmtUpdate = $pdo->prepare($queryUpdate);
                 $stmtUpdate->bindParam(":jsonArrayUpdated", $jsonArrayUpdated);
@@ -55,7 +51,6 @@ if ($_SESSION){
     
                 header("Location: ../views/profil.php");
             } else {
-                // La liste est déjà vide, aucune mise à jour n'est nécessaire
                 header("Location: ../views/profil.php");
             }
         }else {
